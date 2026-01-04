@@ -85,7 +85,7 @@
             
             <div class="highlight">
                 <h3><i class="fas fa-lightbulb"></i> TTS Tips</h3>
-                <p>Click on any section title <i class="fas fa-volume-up"></i> to hear it read aloud. Use the controls above to play/pause or adjust speech speed. Click the speaker icon next to topics to hear the entire topic content.</p>
+                <p>Click on any section title <i class="fas fa-volume-up"></i> to hear it read aloud. Use the controls above to play/pause or adjust speech speed. Click the speaker icon next to topics to hear the entire topic content. Each table now has a speaker button to read table data in a structured format.</p>
             </div>
         </div>
         
@@ -116,56 +116,61 @@
                     <h3>Feature Engineering Techniques</h3>
                 </div>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Technique</th>
-                            <th>Description</th>
-                            <th>Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Data Cleaning</td>
-                            <td>Imputation</td>
-                            <td>Filling missing values using statistical methods (mean, median, mode) or sophisticated models (KNN, MICE).</td>
-                            <td>Replacing a missing 'Age' value with the median age of the dataset.</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">Feature Construction</td>
-                            <td>Aggregation</td>
-                            <td>Combining multiple features into a single, more informative feature.</td>
-                            <td>Converting individual transaction records into a single 'Total Customer Spend' feature.</td>
-                        </tr>
-                        <tr>
-                            <td>Binning/Discretization</td>
-                            <td>Grouping continuous numerical values into discrete bins or categories.</td>
-                            <td>Converting 'Age' (1-100) into categories like 'Child', 'Adult', 'Senior'.</td>
-                        </tr>
-                        <tr>
-                            <td>Polynomial Features</td>
-                            <td>Introducing non-linearity by creating interaction terms or powers of existing features.</td>
-                            <td>If X₁ and X₂ are features, adding X₁×X₂ or X₁².</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">Data Transformation</td>
-                            <td>Scaling/Normalization</td>
-                            <td>Adjusting the scale of numerical features to a standard range.</td>
-                            <td>Standardizing features to a mean of 0 and a standard deviation of 1.</td>
-                        </tr>
-                        <tr>
-                            <td>Encoding</td>
-                            <td>Converting categorical variables into a numerical format suitable for machine learning models.</td>
-                            <td>Using One-Hot Encoding for colors (Red, Blue) or Label Encoding for size (Small, Medium, Large).</td>
-                        </tr>
-                        <tr>
-                            <td>Outlier Handling</td>
-                            <td>Transforming or removing extreme values that can skew model training.</td>
-                            <td>Applying a Log Transformation to heavily skewed features like income.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Technique</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Data Cleaning</td>
+                                <td>Imputation</td>
+                                <td>Filling missing values using statistical methods (mean, median, mode) or sophisticated models (KNN, MICE).</td>
+                                <td>Replacing a missing 'Age' value with the median age of the dataset.</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Feature Construction</td>
+                                <td>Aggregation</td>
+                                <td>Combining multiple features into a single, more informative feature.</td>
+                                <td>Converting individual transaction records into a single 'Total Customer Spend' feature.</td>
+                            </tr>
+                            <tr>
+                                <td>Binning/Discretization</td>
+                                <td>Grouping continuous numerical values into discrete bins or categories.</td>
+                                <td>Converting 'Age' (1-100) into categories like 'Child', 'Adult', 'Senior'.</td>
+                            </tr>
+                            <tr>
+                                <td>Polynomial Features</td>
+                                <td>Introducing non-linearity by creating interaction terms or powers of existing features.</td>
+                                <td>If X₁ and X₂ are features, adding X₁×X₂ or X₁².</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Data Transformation</td>
+                                <td>Scaling/Normalization</td>
+                                <td>Adjusting the scale of numerical features to a standard range.</td>
+                                <td>Standardizing features to a mean of 0 and a standard deviation of 1.</td>
+                            </tr>
+                            <tr>
+                                <td>Encoding</td>
+                                <td>Converting categorical variables into a numerical format suitable for machine learning models.</td>
+                                <td>Using One-Hot Encoding for colors (Red, Blue) or Label Encoding for size (Small, Medium, Large).</td>
+                            </tr>
+                            <tr>
+                                <td>Outlier Handling</td>
+                                <td>Transforming or removing extreme values that can skew model training.</td>
+                                <td>Applying a Log Transformation to heavily skewed features like income.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <!-- Feature Selection -->
@@ -190,37 +195,42 @@
                 </div>
                 <p>These methods wrap the feature selection process around the model, using its performance as the evaluation criterion.</p>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Process</th>
-                            <th>Computational Complexity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Forward Selection</td>
-                            <td>Starts with an empty set of features and greedily adds the feature that results in the greatest model performance improvement until a stopping criterion is met.</td>
-                            <td>O(N²) in the worst case, where N is the number of features.</td>
-                        </tr>
-                        <tr>
-                            <td>Backward Elimination</td>
-                            <td>Starts with all features and iteratively removes the feature whose removal results in the least performance drop (or greatest improvement).</td>
-                            <td>Similar to Forward Selection, highly dependent on the model complexity.</td>
-                        </tr>
-                        <tr>
-                            <td>Recursive Feature Elimination (RFE)</td>
-                            <td>An iterative process where the model is trained, and features are ranked by importance. The least important features are pruned, and the process repeats until the desired size is reached.</td>
-                            <td>Requires retraining the model multiple times, making it computationally intensive.</td>
-                        </tr>
-                        <tr>
-                            <td>Exhaustive Feature Selection</td>
-                            <td>Checks all possible combinations of features. For N features, there are 2^N - 1 subsets.</td>
-                            <td>O(2^N) - Impractical for large N (e.g., N=40 is computationally impossible).</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Process</th>
+                                <th>Computational Complexity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Forward Selection</td>
+                                <td>Starts with an empty set of features and greedily adds the feature that results in the greatest model performance improvement until a stopping criterion is met.</td>
+                                <td>O(N²) in the worst case, where N is the number of features.</td>
+                            </tr>
+                            <tr>
+                                <td>Backward Elimination</td>
+                                <td>Starts with all features and iteratively removes the feature whose removal results in the least performance drop (or greatest improvement).</td>
+                                <td>Similar to Forward Selection, highly dependent on the model complexity.</td>
+                            </tr>
+                            <tr>
+                                <td>Recursive Feature Elimination (RFE)</td>
+                                <td>An iterative process where the model is trained, and features are ranked by importance. The least important features are pruned, and the process repeats until the desired size is reached.</td>
+                                <td>Requires retraining the model multiple times, making it computationally intensive.</td>
+                            </tr>
+                            <tr>
+                                <td>Exhaustive Feature Selection</td>
+                                <td>Checks all possible combinations of features. For N features, there are 2^N - 1 subsets.</td>
+                                <td>O(2^N) - Impractical for large N (e.g., N=40 is computationally impossible).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
                 <div class="tts-section" onclick="speakSection(this)">
                     <i class="fas fa-volume-up"></i>
@@ -269,30 +279,36 @@
                     <i class="fas fa-volume-up"></i>
                     <h3>1. Basic Combining Techniques</h3>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Technique</th>
-                            <th>Model Type</th>
-                            <th>Combination Method</th>
-                            <th>Application</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Max Voting (Hard)</td>
-                            <td>Classification</td>
-                            <td>Takes a simple majority vote of all model predictions.</td>
-                            <td>Useful when individual models have distinct strengths.</td>
-                        </tr>
-                        <tr>
-                            <td>Averaging (Soft)</td>
-                            <td>Regression/Classification</td>
-                            <td>Takes the average of individual predictions (regression) or the average of predicted probabilities (classification).</td>
-                            <td>Effective when minimizing variance is a priority.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Technique</th>
+                                <th>Model Type</th>
+                                <th>Combination Method</th>
+                                <th>Application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Max Voting (Hard)</td>
+                                <td>Classification</td>
+                                <td>Takes a simple majority vote of all model predictions.</td>
+                                <td>Useful when individual models have distinct strengths.</td>
+                            </tr>
+                            <tr>
+                                <td>Averaging (Soft)</td>
+                                <td>Regression/Classification</td>
+                                <td>Takes the average of individual predictions (regression) or the average of predicted probabilities (classification).</td>
+                                <td>Effective when minimizing variance is a priority.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
                 <div class="tts-section" onclick="speakSection(this)">
                     <i class="fas fa-volume-up"></i>
@@ -326,57 +342,62 @@
                     <h3>Comparison Table</h3>
                 </div>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Differentiating Factor</th>
-                            <th>Bagging (e.g., Random Forest)</th>
-                            <th>Boosting (e.g., AdaBoost, XGBoost)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mechanism</td>
-                            <td>Parallel. Models are trained independently and simultaneously.</td>
-                            <td>Sequential. Models are trained iteratively, where each subsequent model depends on the previous one.</td>
-                        </tr>
-                        <tr>
-                            <td>Objective</td>
-                            <td>To reduce Variance (overfitting).</td>
-                            <td>To reduce Bias (underfitting) and convert weak learners into strong ones.</td>
-                        </tr>
-                        <tr>
-                            <td>Model Weighting</td>
-                            <td>All base learners (e.g., trees) are typically given equal weight in the final prediction.</td>
-                            <td>Learners are weighted based on their performance; more accurate learners get a higher weight.</td>
-                        </tr>
-                        <tr>
-                            <td>Data Handling</td>
-                            <td>Uses Bootstrap Samples (sampling with replacement) to create independent subsets for each model.</td>
-                            <td>Focuses on the misclassified or high-error instances from the previous iteration by re-weighting or predicting residuals.</td>
-                        </tr>
-                        <tr>
-                            <td>Base Learner</td>
-                            <td>Usually complex, high-variance models (e.g., deep, unpruned Decision Trees).</td>
-                            <td>Usually simple, low-complexity models (e.g., decision stumps or shallow trees).</td>
-                        </tr>
-                        <tr>
-                            <td>Final Result</td>
-                            <td>A single robust model that averages the predictions from multiple high-variance, low-bias models.</td>
-                            <td>A series of weak, low-bias models that are incrementally combined to form a single, highly accurate model.</td>
-                        </tr>
-                        <tr>
-                            <td>Computational</td>
-                            <td>Highly amenable to parallelization, making training faster.</td>
-                            <td>Must be trained sequentially, limiting parallelization.</td>
-                        </tr>
-                        <tr>
-                            <td>Prone To</td>
-                            <td>Less prone to overfitting than a single decision tree, but can still overfit if the base trees are too correlated.</td>
-                            <td>Highly prone to overfitting if the number of iterations (learners) is too large.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Differentiating Factor</th>
+                                <th>Bagging (e.g., Random Forest)</th>
+                                <th>Boosting (e.g., AdaBoost, XGBoost)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mechanism</td>
+                                <td>Parallel. Models are trained independently and simultaneously.</td>
+                                <td>Sequential. Models are trained iteratively, where each subsequent model depends on the previous one.</td>
+                            </tr>
+                            <tr>
+                                <td>Objective</td>
+                                <td>To reduce Variance (overfitting).</td>
+                                <td>To reduce Bias (underfitting) and convert weak learners into strong ones.</td>
+                            </tr>
+                            <tr>
+                                <td>Model Weighting</td>
+                                <td>All base learners (e.g., trees) are typically given equal weight in the final prediction.</td>
+                                <td>Learners are weighted based on their performance; more accurate learners get a higher weight.</td>
+                            </tr>
+                            <tr>
+                                <td>Data Handling</td>
+                                <td>Uses Bootstrap Samples (sampling with replacement) to create independent subsets for each model.</td>
+                                <td>Focuses on the misclassified or high-error instances from the previous iteration by re-weighting or predicting residuals.</td>
+                            </tr>
+                            <tr>
+                                <td>Base Learner</td>
+                                <td>Usually complex, high-variance models (e.g., deep, unpruned Decision Trees).</td>
+                                <td>Usually simple, low-complexity models (e.g., decision stumps or shallow trees).</td>
+                            </tr>
+                            <tr>
+                                <td>Final Result</td>
+                                <td>A single robust model that averages the predictions from multiple high-variance, low-bias models.</td>
+                                <td>A series of weak, low-bias models that are incrementally combined to form a single, highly accurate model.</td>
+                            </tr>
+                            <tr>
+                                <td>Computational</td>
+                                <td>Highly amenable to parallelization, making training faster.</td>
+                                <td>Must be trained sequentially, limiting parallelization.</td>
+                            </tr>
+                            <tr>
+                                <td>Prone To</td>
+                                <td>Less prone to overfitting than a single decision tree, but can still overfit if the base trees are too correlated.</td>
+                                <td>Highly prone to overfitting if the number of iterations (learners) is too large.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <!-- Hyperparameter Tuning -->
@@ -402,32 +423,38 @@
                     <i class="fas fa-volume-up"></i>
                     <h3>Hyperparameter Tuning Methods</h3>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Search Strategy</th>
-                            <th>Efficiency & Accuracy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Grid Search</td>
-                            <td>Exhaustively searches all combinations within a predefined grid.</td>
-                            <td>Guarantees finding the best set of hyperparameters from the defined space, but is extremely slow and computationally expensive.</td>
-                        </tr>
-                        <tr>
-                            <td>Random Search</td>
-                            <td>Samples a fixed number of combinations randomly from the search space.</td>
-                            <td>Often finds a near-optimal solution much faster than Grid Search, as parameters are often not equally important.</td>
-                        </tr>
-                        <tr>
-                            <td>Bayesian Optimization</td>
-                            <td>Builds a probabilistic model of the objective function and intelligently chooses the next set of hyperparameters to evaluate.</td>
-                            <td>The most efficient method, minimizing the number of model trainings required to find the optimum.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Search Strategy</th>
+                                <th>Efficiency & Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Grid Search</td>
+                                <td>Exhaustively searches all combinations within a predefined grid.</td>
+                                <td>Guarantees finding the best set of hyperparameters from the defined space, but is extremely slow and computationally expensive.</td>
+                            </tr>
+                            <tr>
+                                <td>Random Search</td>
+                                <td>Samples a fixed number of combinations randomly from the search space.</td>
+                                <td>Often finds a near-optimal solution much faster than Grid Search, as parameters are often not equally important.</td>
+                            </tr>
+                            <tr>
+                                <td>Bayesian Optimization</td>
+                                <td>Builds a probabilistic model of the objective function and intelligently chooses the next set of hyperparameters to evaluate.</td>
+                                <td>The most efficient method, minimizing the number of model trainings required to find the optimum.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
                 <div class="tts-section" onclick="speakSection(this)">
                     <i class="fas fa-volume-up"></i>
@@ -468,27 +495,33 @@
                     <h3>2. Key RL Algorithms (Temporal Differencing)</h3>
                 </div>
                 <p>TD learning methods are highly efficient as they learn from experience without a model of the environment and can update estimates based on subsequent estimates (bootstrapping).</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Algorithm</th>
-                            <th>Policy Type</th>
-                            <th>Learning Mechanism</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Q-Learning</td>
-                            <td>Off-Policy</td>
-                            <td>Learns the optimal Q-function Q* by using the maximum maxₐ(Q(Sₜ₊₁,a')) value in the update. It evaluates the best possible action regardless of the action actually taken.</td>
-                        </tr>
-                        <tr>
-                            <td>SARSA</td>
-                            <td>On-Policy</td>
-                            <td>Learns the Q-function for the policy currently being followed. The update uses the value Q(Sₜ₊₁,Aₜ₊₁) where Aₜ₊₁ is the action actually taken in the next state Sₜ₊₁.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="table-container">
+                    <button class="table-tts-btn" onclick="speakTable(this)" title="Read table content">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Policy Type</th>
+                                <th>Learning Mechanism</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Q-Learning</td>
+                                <td>Off-Policy</td>
+                                <td>Learns the optimal Q-function Q* by using the maximum maxₐ(Q(Sₜ₊₁,a')) value in the update. It evaluates the best possible action regardless of the action actually taken.</td>
+                            </tr>
+                            <tr>
+                                <td>SARSA</td>
+                                <td>On-Policy</td>
+                                <td>Learns the Q-function for the policy currently being followed. The update uses the value Q(Sₜ₊₁,Aₜ₊₁) where Aₜ₊₁ is the action actually taken in the next state Sₜ₊₁.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
                 <div class="tts-section" onclick="speakSection(this)">
                     <i class="fas fa-volume-up"></i>
@@ -508,8 +541,6 @@
         const speech = window.speechSynthesis;
         let currentUtterance = null;
         let isPlaying = false;
-        let playAllMode = false;
-        let currentSectionIndex = 0;
         
         // DOM Elements
         const playAllBtn = document.getElementById('playAllBtn');
@@ -573,28 +604,66 @@
             const clone = unit.cloneNode(true);
             
             // Remove all buttons and icons from the clone
-            clone.querySelectorAll('button, .topic-play-btn, .tts-section i').forEach(el => {
+            clone.querySelectorAll('button, .topic-play-btn, .tts-section i, .table-tts-btn').forEach(el => {
                 el.remove();
+            });
+            
+            // Convert tables to readable text
+            clone.querySelectorAll('table').forEach(table => {
+                const tableText = convertTableToText(table);
+                const tableContainer = table.closest('.table-container') || table.parentNode;
+                const textNode = document.createTextNode(tableText);
+                tableContainer.replaceChild(textNode, table);
             });
             
             // Get all text content
             return clone.textContent.trim();
         }
         
-        // Function to speak entire unit content
-        function speakUnitContent(unitId, listItem) {
-            const unitText = getUnitText(unitId);
-            if (unitText) {
-                // Add speaking class to the list item
-                listItem.classList.add('speaking');
+        // Function to convert table to readable text
+        function convertTableToText(table) {
+            let text = "Table with the following data: ";
+            const rows = table.querySelectorAll('tr');
+            
+            // Get headers
+            const headers = [];
+            const headerCells = rows[0].querySelectorAll('th');
+            headerCells.forEach(cell => {
+                headers.push(cell.textContent.trim());
+            });
+            
+            text += "Columns are: " + headers.join(", ") + ". ";
+            
+            // Process each data row
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].querySelectorAll('td');
+                let rowText = "Row " + i + ": ";
                 
-                speakText(unitText, listItem);
+                for (let j = 0; j < cells.length; j++) {
+                    // Handle rowspan
+                    const rowspan = cells[j].getAttribute('rowspan');
+                    if (rowspan && parseInt(rowspan) > 1) {
+                        rowText += headers[j] + " applies to next " + rowspan + " rows. ";
+                    }
+                    
+                    // Add cell content
+                    const cellContent = cells[j].textContent.trim();
+                    if (cellContent) {
+                        rowText += headers[j] + ": " + cellContent + ". ";
+                    }
+                }
                 
-                // When speech ends, remove speaking class
-                currentUtterance.onend = function() {
-                    listItem.classList.remove('speaking');
-                };
+                text += rowText;
             }
+            
+            return text;
+        }
+        
+        // Function to speak table content
+        function speakTable(button) {
+            const table = button.closest('.table-container').querySelector('table');
+            const tableText = convertTableToText(table);
+            speakText(tableText, button.closest('.table-container'));
         }
         
         // Function to handle section click for speaking
@@ -613,8 +682,15 @@
             // Get the next sibling elements until next tts-section or end
             let nextElement = element.nextElementSibling;
             while (nextElement && !nextElement.classList.contains('tts-section')) {
-                // Skip tables for now as they can be complex
-                if (nextElement.tagName !== 'TABLE') {
+                // Handle tables
+                if (nextElement.classList.contains('table-container')) {
+                    const table = nextElement.querySelector('table');
+                    if (table) {
+                        text += convertTableToText(table) + ' ';
+                    }
+                } else if (nextElement.tagName === 'TABLE') {
+                    text += convertTableToText(nextElement) + ' ';
+                } else {
                     text += nextElement.textContent + ' ';
                 }
                 nextElement = nextElement.nextElementSibling;
@@ -691,7 +767,10 @@
             // Click on play button to speak entire topic
             playBtn.addEventListener('click', function(e) {
                 e.stopPropagation(); // Prevent navigation
-                speakUnitContent(targetId, item);
+                const unitText = getUnitText(targetId);
+                if (unitText) {
+                    speakText(unitText, item);
+                }
             });
         });
         
