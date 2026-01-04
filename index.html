@@ -39,18 +39,53 @@
         <div class="sidebar">
             <h2><i class="fas fa-list"></i> Table of Contents</h2>
             <ul class="topic-list" id="topicList">
-                <li class="active" data-target="feature-engineering">Feature Engineering</li>
-                <li data-target="feature-selection">Feature Selection</li>
-                <li data-target="dimensionality-reduction">Dimensionality Reduction</li>
-                <li data-target="ensemble-learning">Ensemble Learning</li>
-                <li data-target="bagging-vs-boosting">Bagging vs Boosting</li>
-                <li data-target="hyperparameter-tuning">Hyperparameter Tuning</li>
-                <li data-target="reinforcement-learning">Reinforcement Learning</li>
+                <li class="active" data-target="feature-engineering">
+                    <span>Feature Engineering</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="feature-selection">
+                    <span>Feature Selection</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="dimensionality-reduction">
+                    <span>Dimensionality Reduction</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="ensemble-learning">
+                    <span>Ensemble Learning</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="bagging-vs-boosting">
+                    <span>Bagging vs Boosting</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="hyperparameter-tuning">
+                    <span>Hyperparameter Tuning</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
+                <li data-target="reinforcement-learning">
+                    <span>Reinforcement Learning</span>
+                    <button class="topic-play-btn" title="Play this topic">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </li>
             </ul>
             
             <div class="highlight">
                 <h3><i class="fas fa-lightbulb"></i> TTS Tips</h3>
-                <p>Click on any section title <i class="fas fa-volume-up"></i> to hear it read aloud. Use the controls above to play/pause or adjust speech speed.</p>
+                <p>Click on any section title <i class="fas fa-volume-up"></i> to hear it read aloud. Use the controls above to play/pause or adjust speech speed. Click the speaker icon next to topics to hear the entire topic content.</p>
             </div>
         </div>
         
@@ -475,7 +510,6 @@
         let isPlaying = false;
         let playAllMode = false;
         let currentSectionIndex = 0;
-        const allSections = document.querySelectorAll('.tts-section, h2, h3, p, li, td');
         
         // DOM Elements
         const playAllBtn = document.getElementById('playAllBtn');
@@ -484,6 +518,7 @@
         const speedSelect = document.getElementById('speedSelect');
         const topicListItems = document.querySelectorAll('.topic-list li');
         const units = document.querySelectorAll('.unit');
+        const topicPlayButtons = document.querySelectorAll('.topic-play-btn');
         
         // Function to speak text
         function speakText(text, element = null) {
@@ -514,14 +549,6 @@
                     element.classList.remove('speaking');
                 }
                 isPlaying = false;
-                
-                // If in playAll mode, move to next section
-                if (playAllMode && currentSectionIndex < allSections.length) {
-                    setTimeout(() => speakNextSection(), 500);
-                } else if (playAllMode) {
-                    playAllMode = false;
-                    playAllBtn.classList.remove('active');
-                }
             };
             
             // When speech errors
@@ -530,8 +557,6 @@
                     element.classList.remove('speaking');
                 }
                 isPlaying = false;
-                playAllMode = false;
-                playAllBtn.classList.remove('active');
             };
             
             // Speak the text
@@ -539,58 +564,74 @@
             isPlaying = true;
         }
         
-        // Function to speak the next section in playAll mode
-        function speakNextSection() {
-            if (currentSectionIndex >= allSections.length) {
-                playAllMode = false;
-                playAllBtn.classList.remove('active');
-                return;
+        // Function to get all text from a unit
+        function getUnitText(unitId) {
+            const unit = document.getElementById(unitId);
+            if (!unit) return '';
+            
+            // Clone the unit to avoid modifying the original
+            const clone = unit.cloneNode(true);
+            
+            // Remove all buttons and icons from the clone
+            clone.querySelectorAll('button, .topic-play-btn, .tts-section i').forEach(el => {
+                el.remove();
+            });
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+        
+        // Function to speak entire unit content
+        function speakUnitContent(unitId, listItem) {
+            const unitText = getUnitText(unitId);
+            if (unitText) {
+                // Add speaking class to the list item
+                listItem.classList.add('speaking');
+                
+                speakText(unitText, listItem);
+                
+                // When speech ends, remove speaking class
+                currentUtterance.onend = function() {
+                    listItem.classList.remove('speaking');
+                };
             }
-            
-            const element = allSections[currentSectionIndex];
-            let text = '';
-            
-            // Extract text based on element type
-            if (element.classList.contains('tts-section')) {
-                text = element.querySelector('h3')?.textContent || element.textContent;
-            } else if (element.tagName === 'H2' || element.tagName === 'H3') {
-                text = element.textContent;
-            } else if (element.tagName === 'P' || element.tagName === 'LI' || element.tagName === 'TD') {
-                text = element.textContent;
-                // Skip very short elements
-                if (text.length < 10) {
-                    currentSectionIndex++;
-                    speakNextSection();
-                    return;
-                }
-            }
-            
-            // Speak the text if we have meaningful content
-            if (text.trim().length > 0) {
-                speakText(text, element);
-            }
-            
-            currentSectionIndex++;
         }
         
         // Function to handle section click for speaking
         function speakSection(element) {
+            // Get all text from this section
+            const sectionText = getSectionText(element);
+            speakText(sectionText, element);
+        }
+        
+        // Function to get all text from a section
+        function getSectionText(element) {
+            // Get the heading
             const heading = element.querySelector('h3');
-            const text = heading ? heading.textContent : element.textContent;
-            speakText(text, element);
+            let text = heading ? heading.textContent + '. ' : '';
+            
+            // Get the next sibling elements until next tts-section or end
+            let nextElement = element.nextElementSibling;
+            while (nextElement && !nextElement.classList.contains('tts-section')) {
+                // Skip tables for now as they can be complex
+                if (nextElement.tagName !== 'TABLE') {
+                    text += nextElement.textContent + ' ';
+                }
+                nextElement = nextElement.nextElementSibling;
+            }
+            
+            return text.trim();
         }
         
         // Event Listeners for TTS buttons
         playAllBtn.addEventListener('click', function() {
-            if (!playAllMode) {
-                playAllMode = true;
-                currentSectionIndex = 0;
-                this.classList.add('active');
-                speakNextSection();
-            } else {
-                playAllMode = false;
-                this.classList.remove('active');
-                speech.cancel();
+            // Get current visible unit
+            const visibleUnit = document.querySelector('.unit[style="display: block;"]');
+            if (visibleUnit) {
+                const unitText = getUnitText(visibleUnit.id);
+                if (unitText) {
+                    speakText(unitText);
+                }
             }
         });
         
@@ -607,8 +648,6 @@
         stopBtn.addEventListener('click', function() {
             speech.cancel();
             isPlaying = false;
-            playAllMode = false;
-            playAllBtn.classList.remove('active');
             document.querySelectorAll('.speaking').forEach(el => {
                 el.classList.remove('speaking');
             });
@@ -628,13 +667,14 @@
         
         // Navigation between topics
         topicListItems.forEach(item => {
-            item.addEventListener('click', function() {
+            const targetId = item.getAttribute('data-target');
+            const playBtn = item.querySelector('.topic-play-btn');
+            
+            // Click on the topic text to navigate
+            item.querySelector('span').addEventListener('click', function() {
                 // Update active class
                 topicListItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Get target section
-                const targetId = this.getAttribute('data-target');
+                item.classList.add('active');
                 
                 // Hide all units
                 units.forEach(unit => {
@@ -646,8 +686,12 @@
                 
                 // Stop any ongoing speech
                 speech.cancel();
-                playAllMode = false;
-                playAllBtn.classList.remove('active');
+            });
+            
+            // Click on play button to speak entire topic
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent navigation
+                speakUnitContent(targetId, item);
             });
         });
         
