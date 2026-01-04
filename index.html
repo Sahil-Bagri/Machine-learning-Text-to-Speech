@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Notes with TTS Learning Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1><i class="fas fa-robot"></i> Machine Learning Notes with TTS</h1>
+            <div class="tts-controls">
+                <button id="playAllBtn" class="tts-btn" title="Play All Content">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="pauseBtn" class="tts-btn" title="Pause Speech">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button id="stopBtn" class="tts-btn" title="Stop Speech">
+                    <i class="fas fa-stop"></i>
+                </button>
+                <div class="speed-control">
+                    <span>Speed:</span>
+                    <select id="speedSelect">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.8">0.8x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.2">1.2x</option>
+                        <option value="1.5">1.5x</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2><i class="fas fa-list"></i> Table of Contents</h2>
+            <ul class="topic-list" id="topicList">
+                <li class="active" data-target="feature-engineering">Feature Engineering</li>
+                <li data-target="feature-selection">Feature Selection</li>
+                <li data-target="dimensionality-reduction">Dimensionality Reduction</li>
+                <li data-target="ensemble-learning">Ensemble Learning</li>
+                <li data-target="bagging-vs-boosting">Bagging vs Boosting</li>
+                <li data-target="hyperparameter-tuning">Hyperparameter Tuning</li>
+                <li data-target="reinforcement-learning">Reinforcement Learning</li>
+            </ul>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-lightbulb"></i> TTS Tips</h3>
+                <p>Click on any section title <i class="fas fa-volume-up"></i> to hear it read aloud. Use the controls above to play/pause or adjust speech speed.</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Feature Engineering -->
+            <div class="unit" id="feature-engineering">
+                <h2>Unit 1: Feature Engineering</h2>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>What is Feature Engineering?</h3>
+                </div>
+                <p>Feature Engineering is the process of using domain knowledge to create new features or modify existing ones from the raw data to improve the performance of a machine learning model. It is the art and science of preparing the input data features that best represent the underlying problem to the predictive models.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Necessity of Feature Engineering</h3>
+                </div>
+                <ol>
+                    <li><strong>Increases Model Performance:</strong> Well-engineered features provide clearer signals to the model, allowing simpler algorithms to achieve better results than complex algorithms on raw data.</li>
+                    <li><strong>Improves Data Quality:</strong> It handles imperfections like missing values and outliers, ensuring data integrity.</li>
+                    <li><strong>Enhances Interpretability:</strong> Creating meaningful, consolidated features can make the final model's decisions easier to understand and explain.</li>
+                    <li><strong>Addresses Algorithmic Constraints:</strong> Techniques like feature scaling are essential for distance-based (KNN, SVM) and gradient-descent-based (Neural Networks, Linear Regression) algorithms.</li>
+                </ol>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Feature Engineering Techniques</h3>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Technique</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Cleaning</td>
+                            <td>Imputation</td>
+                            <td>Filling missing values using statistical methods (mean, median, mode) or sophisticated models (KNN, MICE).</td>
+                            <td>Replacing a missing 'Age' value with the median age of the dataset.</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Feature Construction</td>
+                            <td>Aggregation</td>
+                            <td>Combining multiple features into a single, more informative feature.</td>
+                            <td>Converting individual transaction records into a single 'Total Customer Spend' feature.</td>
+                        </tr>
+                        <tr>
+                            <td>Binning/Discretization</td>
+                            <td>Grouping continuous numerical values into discrete bins or categories.</td>
+                            <td>Converting 'Age' (1-100) into categories like 'Child', 'Adult', 'Senior'.</td>
+                        </tr>
+                        <tr>
+                            <td>Polynomial Features</td>
+                            <td>Introducing non-linearity by creating interaction terms or powers of existing features.</td>
+                            <td>If X₁ and X₂ are features, adding X₁×X₂ or X₁².</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Data Transformation</td>
+                            <td>Scaling/Normalization</td>
+                            <td>Adjusting the scale of numerical features to a standard range.</td>
+                            <td>Standardizing features to a mean of 0 and a standard deviation of 1.</td>
+                        </tr>
+                        <tr>
+                            <td>Encoding</td>
+                            <td>Converting categorical variables into a numerical format suitable for machine learning models.</td>
+                            <td>Using One-Hot Encoding for colors (Red, Blue) or Label Encoding for size (Small, Medium, Large).</td>
+                        </tr>
+                        <tr>
+                            <td>Outlier Handling</td>
+                            <td>Transforming or removing extreme values that can skew model training.</td>
+                            <td>Applying a Log Transformation to heavily skewed features like income.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Feature Selection -->
+            <div class="unit" id="feature-selection" style="display: none;">
+                <h2>Feature Selection Methodologies</h2>
+                <p>Feature selection aims to find the optimal subset of relevant features, reducing overfitting, improving model interpretability, and speeding up training.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>A. Filter-Based Approaches</h3>
+                </div>
+                <p>These methods rank features based on statistical metrics, treating the model as a "filter."</p>
+                <ul>
+                    <li><strong>Information Gain / Mutual Information:</strong> Quantifies the dependency between two random variables. Higher mutual information means the feature is more predictive of the target variable.</li>
+                    <li><strong>Chi-Square Test (χ²):</strong> Assesses the independence of two categorical variables. A large χ² statistic suggests that the feature and target are dependent and thus, the feature is important.</li>
+                    <li><strong>Fisher's Score:</strong> Calculates the ratio of the inter-class variance to the intra-class variance. Higher scores indicate better feature separability between classes.</li>
+                </ul>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>B. Wrapper-Based Methods</h3>
+                </div>
+                <p>These methods wrap the feature selection process around the model, using its performance as the evaluation criterion.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Process</th>
+                            <th>Computational Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Forward Selection</td>
+                            <td>Starts with an empty set of features and greedily adds the feature that results in the greatest model performance improvement until a stopping criterion is met.</td>
+                            <td>O(N²) in the worst case, where N is the number of features.</td>
+                        </tr>
+                        <tr>
+                            <td>Backward Elimination</td>
+                            <td>Starts with all features and iteratively removes the feature whose removal results in the least performance drop (or greatest improvement).</td>
+                            <td>Similar to Forward Selection, highly dependent on the model complexity.</td>
+                        </tr>
+                        <tr>
+                            <td>Recursive Feature Elimination (RFE)</td>
+                            <td>An iterative process where the model is trained, and features are ranked by importance. The least important features are pruned, and the process repeats until the desired size is reached.</td>
+                            <td>Requires retraining the model multiple times, making it computationally intensive.</td>
+                        </tr>
+                        <tr>
+                            <td>Exhaustive Feature Selection</td>
+                            <td>Checks all possible combinations of features. For N features, there are 2^N - 1 subsets.</td>
+                            <td>O(2^N) - Impractical for large N (e.g., N=40 is computationally impossible).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>C. Embedded-Based Methods</h3>
+                </div>
+                <p>These techniques integrate feature selection directly into the model training.</p>
+                <ul>
+                    <li><strong>Regularization (Lasso):</strong> The L1 penalty term in Lasso Regression forces the coefficients (β) of the less impactful features to become exactly zero, effectively selecting a subset of features.</li>
+                    <li><strong>Tree-based Algorithms (Random Forest/XGBoost):</strong> These models inherently calculate feature importance (e.g., based on how much a feature reduces impurity/loss). The features can then be ranked and selected based on these scores.</li>
+                </ul>
+            </div>
+            
+            <!-- Dimensionality Reduction -->
+            <div class="unit" id="dimensionality-reduction" style="display: none;">
+                <h2>Dimensionality Reduction</h2>
+                <p>Dimensionality reduction is the process of reducing the number of variables by finding a low-dimensional space that preserves the essential characteristics of the high-dimensional data.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Principal Component Analysis (PCA)</h3>
+                </div>
+                <ul>
+                    <li><strong>Mechanism:</strong> PCA is an unsupervised linear projection technique. It identifies the directions (principal components) that maximize the variance in the data. The first component accounts for the most variance, the second for the second most, and so on.</li>
+                    <li><strong>Goal:</strong> To find a lower-dimensional set of bases (Principal Components) that capture the maximum possible variance in the data.</li>
+                    <li><strong>Application:</strong> Noise reduction, speeding up model training, and simplifying visualization.</li>
+                </ul>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Linear Discriminant Analysis (LDA)</h3>
+                </div>
+                <ul>
+                    <li><strong>Goal:</strong> To find a lower-dimensional subspace that maximizes the separation between different classes.</li>
+                    <li><strong>Mechanism:</strong> It seeks to maximize the between-class scatter while simultaneously minimizing the within-class scatter. In essence, it aims to make the classes as distinct as possible in the reduced dimension.</li>
+                    <li><strong>Nature:</strong> It is a supervised method, as it explicitly uses the class labels during the calculation of its axes (linear discriminants).</li>
+                    <li><strong>Constraint:</strong> The maximum number of resulting dimensions it can produce is C-1, where C is the number of classes.</li>
+                </ul>
+            </div>
+            
+            <!-- Ensemble Learning -->
+            <div class="unit" id="ensemble-learning" style="display: none;">
+                <h2>Unit 2: Ensemble Learning</h2>
+                <p>Ensemble methods combine multiple machine learning models (called base learners) to create a single, highly robust model, often achieving superior predictive performance compared to any single constituent model.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>1. Basic Combining Techniques</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Technique</th>
+                            <th>Model Type</th>
+                            <th>Combination Method</th>
+                            <th>Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Max Voting (Hard)</td>
+                            <td>Classification</td>
+                            <td>Takes a simple majority vote of all model predictions.</td>
+                            <td>Useful when individual models have distinct strengths.</td>
+                        </tr>
+                        <tr>
+                            <td>Averaging (Soft)</td>
+                            <td>Regression/Classification</td>
+                            <td>Takes the average of individual predictions (regression) or the average of predicted probabilities (classification).</td>
+                            <td>Effective when minimizing variance is a priority.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>2. Parallel Ensemble Methods (Bagging)</h3>
+                </div>
+                <p><strong>Bagging (Bootstrap Aggregating)</strong> aims to reduce variance and prevent overfitting by training base learners independently and in parallel.</p>
+                <ul>
+                    <li><strong>Mechanism:</strong> Create multiple new training datasets by bootstrap sampling (sampling with replacement) from the original data. Train a base learner (often a Decision Tree) on each new dataset. Combine predictions via averaging (regression) or voting (classification).</li>
+                    <li><strong>Random Forest:</strong> An extension of Bagging for Decision Trees. It introduces feature randomness by only considering a random subset of features at each node split. This decorrelates the trees, further reducing variance and preventing all trees from becoming too similar.</li>
+                </ul>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>3. Sequential Ensemble Methods (Boosting)</h3>
+                </div>
+                <p><strong>Boosting</strong> aims to reduce bias by training base learners sequentially. Each new learner focuses on correcting the errors (residuals) of the previous one.</p>
+                <ul>
+                    <li><strong>AdaBoost (Adaptive Boosting):</strong> Starts by assigning equal weights to all training instances. Trains a weak learner (usually a stump - a single-split tree). Increases the weight of misclassified instances and decreases the weight of correctly classified ones. The next learner is trained to focus on the now-heavily-weighted misclassified instances. The final prediction is a weighted sum of all weak learners.</li>
+                    <li><strong>Gradient Boosting Machine (GBM):</strong> Instead of re-weighting data points, GBM trains subsequent learners to predict the residuals (the negative gradient of the loss function) from the previous model's predictions. The final model is an additive model where each new prediction is added to the ensemble's current prediction.</li>
+                    <li><strong>XGBoost (Extreme Gradient Boosting):</strong> An advanced, optimized implementation of Gradient Boosting. Key Features: Uses both first and second-order derivatives (Hessian matrix) for superior optimization; includes L1 and L2 regularization to prevent overfitting; supports parallel processing; and handles missing data internally. It is renowned for its speed and performance.</li>
+                </ul>
+            </div>
+            
+            <!-- Bagging vs Boosting -->
+            <div class="unit" id="bagging-vs-boosting" style="display: none;">
+                <h2>Bagging vs Boosting</h2>
+                <p>Compare and contrast Bagging and Boosting as ensemble learning techniques, highlighting their core differences in mechanism, objective, and outcome.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Comparison Table</h3>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Differentiating Factor</th>
+                            <th>Bagging (e.g., Random Forest)</th>
+                            <th>Boosting (e.g., AdaBoost, XGBoost)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mechanism</td>
+                            <td>Parallel. Models are trained independently and simultaneously.</td>
+                            <td>Sequential. Models are trained iteratively, where each subsequent model depends on the previous one.</td>
+                        </tr>
+                        <tr>
+                            <td>Objective</td>
+                            <td>To reduce Variance (overfitting).</td>
+                            <td>To reduce Bias (underfitting) and convert weak learners into strong ones.</td>
+                        </tr>
+                        <tr>
+                            <td>Model Weighting</td>
+                            <td>All base learners (e.g., trees) are typically given equal weight in the final prediction.</td>
+                            <td>Learners are weighted based on their performance; more accurate learners get a higher weight.</td>
+                        </tr>
+                        <tr>
+                            <td>Data Handling</td>
+                            <td>Uses Bootstrap Samples (sampling with replacement) to create independent subsets for each model.</td>
+                            <td>Focuses on the misclassified or high-error instances from the previous iteration by re-weighting or predicting residuals.</td>
+                        </tr>
+                        <tr>
+                            <td>Base Learner</td>
+                            <td>Usually complex, high-variance models (e.g., deep, unpruned Decision Trees).</td>
+                            <td>Usually simple, low-complexity models (e.g., decision stumps or shallow trees).</td>
+                        </tr>
+                        <tr>
+                            <td>Final Result</td>
+                            <td>A single robust model that averages the predictions from multiple high-variance, low-bias models.</td>
+                            <td>A series of weak, low-bias models that are incrementally combined to form a single, highly accurate model.</td>
+                        </tr>
+                        <tr>
+                            <td>Computational</td>
+                            <td>Highly amenable to parallelization, making training faster.</td>
+                            <td>Must be trained sequentially, limiting parallelization.</td>
+                        </tr>
+                        <tr>
+                            <td>Prone To</td>
+                            <td>Less prone to overfitting than a single decision tree, but can still overfit if the base trees are too correlated.</td>
+                            <td>Highly prone to overfitting if the number of iterations (learners) is too large.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Hyperparameter Tuning -->
+            <div class="unit" id="hyperparameter-tuning" style="display: none;">
+                <h2>Unit 3: Hyperparameter Tuning, Model Evaluation & Pipelines</h2>
+                <p>This unit covers the essential steps for fine-tuning models and establishing reliable performance metrics.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Model Evaluation and Data Integrity</h3>
+                </div>
+                <ul>
+                    <li><strong>Cross-Validation (K-Fold):</strong> The dataset is partitioned into K equal-sized folds. The model is trained K times, each time using K–1 folds for training and the remaining fold for validation. Provides a far more robust estimate of the model's true generalization performance than a single train/test split.</li>
+                    <li><strong>Handling Class Imbalance:</strong>
+                        <ul>
+                            <li><strong>Oversampling:</strong> SMOTE (Synthetic Minority Over-sampling Technique) creates synthetic examples for the minority class based on feature space similarity to its nearest neighbors.</li>
+                            <li><strong>Under-sampling:</strong> Removing samples from the majority class. Techniques like Tomek Links or NearMiss help to clean the data and improve class balance.</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Hyperparameter Tuning Methods</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Search Strategy</th>
+                            <th>Efficiency & Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Grid Search</td>
+                            <td>Exhaustively searches all combinations within a predefined grid.</td>
+                            <td>Guarantees finding the best set of hyperparameters from the defined space, but is extremely slow and computationally expensive.</td>
+                        </tr>
+                        <tr>
+                            <td>Random Search</td>
+                            <td>Samples a fixed number of combinations randomly from the search space.</td>
+                            <td>Often finds a near-optimal solution much faster than Grid Search, as parameters are often not equally important.</td>
+                        </tr>
+                        <tr>
+                            <td>Bayesian Optimization</td>
+                            <td>Builds a probabilistic model of the objective function and intelligently chooses the next set of hyperparameters to evaluate.</td>
+                            <td>The most efficient method, minimizing the number of model trainings required to find the optimum.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>The ML Pipeline Concept</h3>
+                </div>
+                <p>An ML Pipeline is a sequence of estimators and transformers that ensures the data preparation steps (like scaling and imputation) are correctly applied to the data before modeling, which is crucial for preventing data leakage.</p>
+                <ul>
+                    <li><strong>Data Leakage Prevention:</strong> The pipeline ensures that operations like fitting a scaler are done only on the training data and then the learned transformation is applied to both training and test data.</li>
+                    <li><strong>Workflow Automation:</strong> It packages the entire workflow into a single object, simplifying deployment and ensuring consistency between training and prediction environments.</li>
+                </ul>
+            </div>
+            
+            <!-- Reinforcement Learning -->
+            <div class="unit" id="reinforcement-learning" style="display: none;">
+                <h2>Unit 4: Reinforcement Learning (RL)</h2>
+                <p>Reinforcement Learning is a paradigm where an Agent learns how to behave in an Environment by performing actions and observing the resulting Rewards and States.</p>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>1. Markov Decision Process (MDP)</h3>
+                </div>
+                <p>The MDP is the mathematical framework for modeling sequential decision-making in RL.</p>
+                <ul>
+                    <li><strong>The Markov Property:</strong> The core assumption is that the future state depends only on the current state and the action taken, not on the entire history of observations.</li>
+                    <li><strong>Components of an MDP:</strong>
+                        <ul>
+                            <li>S: A set of States</li>
+                            <li>A: A set of Actions</li>
+                            <li>P: State Transition Probability P(Sₜ₊₁|Sₜ, Aₜ)</li>
+                            <li>R: Reward Function R(Sₜ, Aₜ)</li>
+                            <li>γ: Discount Factor (to prioritize immediate vs. future rewards)</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>2. Key RL Algorithms (Temporal Differencing)</h3>
+                </div>
+                <p>TD learning methods are highly efficient as they learn from experience without a model of the environment and can update estimates based on subsequent estimates (bootstrapping).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Policy Type</th>
+                            <th>Learning Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q-Learning</td>
+                            <td>Off-Policy</td>
+                            <td>Learns the optimal Q-function Q* by using the maximum maxₐ(Q(Sₜ₊₁,a')) value in the update. It evaluates the best possible action regardless of the action actually taken.</td>
+                        </tr>
+                        <tr>
+                            <td>SARSA</td>
+                            <td>On-Policy</td>
+                            <td>Learns the Q-function for the policy currently being followed. The update uses the value Q(Sₜ₊₁,Aₜ₊₁) where Aₜ₊₁ is the action actually taken in the next state Sₜ₊₁.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tts-section" onclick="speakSection(this)">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>3. Sequential Decision-Making</h3>
+                </div>
+                <p>All of the above methods (MDPs, Bellman, Q-Learning, SARSA) are used to solve problems where the outcome is a sequence of actions rather than a single classification or regression prediction. The challenge is the Credit Assignment Problem: determining which actions (early or late) in the sequence are responsible for a large, delayed reward. RL solves this using the Bellman Equation and the discount factor (γ).</p>
+            </div>
+            
+            <div class="footer-note">
+                <p><i class="fas fa-info-circle"></i> This interactive learning website includes Text-to-Speech functionality to enhance your learning experience. Click on section titles with the <i class="fas fa-volume-up"></i> icon to hear them read aloud.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Text-to-Speech functionality
+        const speech = window.speechSynthesis;
+        let currentUtterance = null;
+        let isPlaying = false;
+        let playAllMode = false;
+        let currentSectionIndex = 0;
+        const allSections = document.querySelectorAll('.tts-section, h2, h3, p, li, td');
+        
+        // DOM Elements
+        const playAllBtn = document.getElementById('playAllBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const speedSelect = document.getElementById('speedSelect');
+        const topicListItems = document.querySelectorAll('.topic-list li');
+        const units = document.querySelectorAll('.unit');
+        
+        // Function to speak text
+        function speakText(text, element = null) {
+            // Cancel any ongoing speech
+            if (speech.speaking) {
+                speech.cancel();
+            }
+            
+            // Remove speaking class from all elements
+            document.querySelectorAll('.speaking').forEach(el => {
+                el.classList.remove('speaking');
+            });
+            
+            // Add speaking class to current element if provided
+            if (element) {
+                element.classList.add('speaking');
+            }
+            
+            // Create utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.rate = parseFloat(speedSelect.value);
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            
+            // When speech ends
+            currentUtterance.onend = function() {
+                if (element) {
+                    element.classList.remove('speaking');
+                }
+                isPlaying = false;
+                
+                // If in playAll mode, move to next section
+                if (playAllMode && currentSectionIndex < allSections.length) {
+                    setTimeout(() => speakNextSection(), 500);
+                } else if (playAllMode) {
+                    playAllMode = false;
+                    playAllBtn.classList.remove('active');
+                }
+            };
+            
+            // When speech errors
+            currentUtterance.onerror = function() {
+                if (element) {
+                    element.classList.remove('speaking');
+                }
+                isPlaying = false;
+                playAllMode = false;
+                playAllBtn.classList.remove('active');
+            };
+            
+            // Speak the text
+            speech.speak(currentUtterance);
+            isPlaying = true;
+        }
+        
+        // Function to speak the next section in playAll mode
+        function speakNextSection() {
+            if (currentSectionIndex >= allSections.length) {
+                playAllMode = false;
+                playAllBtn.classList.remove('active');
+                return;
+            }
+            
+            const element = allSections[currentSectionIndex];
+            let text = '';
+            
+            // Extract text based on element type
+            if (element.classList.contains('tts-section')) {
+                text = element.querySelector('h3')?.textContent || element.textContent;
+            } else if (element.tagName === 'H2' || element.tagName === 'H3') {
+                text = element.textContent;
+            } else if (element.tagName === 'P' || element.tagName === 'LI' || element.tagName === 'TD') {
+                text = element.textContent;
+                // Skip very short elements
+                if (text.length < 10) {
+                    currentSectionIndex++;
+                    speakNextSection();
+                    return;
+                }
+            }
+            
+            // Speak the text if we have meaningful content
+            if (text.trim().length > 0) {
+                speakText(text, element);
+            }
+            
+            currentSectionIndex++;
+        }
+        
+        // Function to handle section click for speaking
+        function speakSection(element) {
+            const heading = element.querySelector('h3');
+            const text = heading ? heading.textContent : element.textContent;
+            speakText(text, element);
+        }
+        
+        // Event Listeners for TTS buttons
+        playAllBtn.addEventListener('click', function() {
+            if (!playAllMode) {
+                playAllMode = true;
+                currentSectionIndex = 0;
+                this.classList.add('active');
+                speakNextSection();
+            } else {
+                playAllMode = false;
+                this.classList.remove('active');
+                speech.cancel();
+            }
+        });
+        
+        pauseBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                speech.pause();
+                isPlaying = false;
+            } else {
+                speech.resume();
+                isPlaying = true;
+            }
+        });
+        
+        stopBtn.addEventListener('click', function() {
+            speech.cancel();
+            isPlaying = false;
+            playAllMode = false;
+            playAllBtn.classList.remove('active');
+            document.querySelectorAll('.speaking').forEach(el => {
+                el.classList.remove('speaking');
+            });
+        });
+        
+        // Speed control
+        speedSelect.addEventListener('change', function() {
+            if (currentUtterance) {
+                currentUtterance.rate = parseFloat(this.value);
+                // If speech is in progress, we need to restart with new rate
+                if (speech.speaking) {
+                    speech.cancel();
+                    speakText(currentUtterance.text);
+                }
+            }
+        });
+        
+        // Navigation between topics
+        topicListItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Update active class
+                topicListItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Get target section
+                const targetId = this.getAttribute('data-target');
+                
+                // Hide all units
+                units.forEach(unit => {
+                    unit.style.display = 'none';
+                });
+                
+                // Show target unit
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Stop any ongoing speech
+                speech.cancel();
+                playAllMode = false;
+                playAllBtn.classList.remove('active');
+            });
+        });
+        
+        // Initialize - show first unit by default
+        document.getElementById('feature-engineering').style.display = 'block';
+        
+        // Add click event to all TTS sections
+        document.querySelectorAll('.tts-section').forEach(section => {
+            section.addEventListener('click', function() {
+                speakSection(this);
+            });
+        });
+        
+        // Check for browser TTS support
+        window.addEventListener('load', function() {
+            if (!('speechSynthesis' in window)) {
+                alert("Your browser doesn't support the Web Speech API. Text-to-speech functionality will not work.");
+            }
+        });
+    </script>
+</body>
+</html>
