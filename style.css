@@ -152,6 +152,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
         .topic-list li:hover {
@@ -163,6 +166,22 @@
             background: #e8f4fc;
             border-left: 4px solid #3498db;
             font-weight: 600;
+        }
+        
+        .topic-play-btn {
+            background: transparent;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .topic-play-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
         }
         
         table {
